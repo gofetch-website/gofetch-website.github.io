@@ -44,6 +44,12 @@
 
 		<link href="css/theme.css" rel="stylesheet">
 		<title>GoFetch</title>
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="gofetch.fail" />
+		<meta name="twitter:title" content="GoFetch: Breaking Constant-Time Cryptographic Implementations Using Data Memory-Dependent Prefetchers" />
+		<meta name="twitter:description" content="A new microarchitectural side-channel attack exploiting data memory-dependent prefetchers in Apple silicons." />
+		<meta name="twitter:image:src" content="https://gofetch.fail/img/gofetch_1000.jpg" />
 	</head>
 
 	<body>
@@ -62,6 +68,399 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="container">
+			<section id="abstract">
+				<h4><i class="fa fa-key" style="padding-right: 10px;"></i>Overview of <span
+						style="color: #000080;">GoFetch Attack</span></h4>
+				<div class="container">
+					<p>
+						GoFetch is a microarchitectural side-channel attack 
+						that can extract secret keys from 
+						constant-time cryptographic implementations via 
+						data memory-dependent prefetchers (DMPs).
+						<br>
+						<br>
+						We show that DMPs are present in many Apple CPUs 
+						and pose a real threat to multiple cryptographic implementations, 
+						allowing us to extract keys from OpenSSL Diffie-Hellman, 
+						Go RSA, as well as CRYSTALS Kyber and Dilithium.
+					</p>
+
+					<div class="row" style="padding-top: 10px; text-align: center;">
+						<div class="col-xs-12 button-wrapper">
+							<a href="files/gofetch.pdf" target="_blank" class="btn btn-primary mr-2"
+								style="margin-right: 10px;"><i class="fa fa-book"
+									style="padding-right: 10px;"></i>Paper</a>
+							<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cite-gofetch", style="margin-right: 10px;"><i
+									class="fa fa-quote-left" style="padding-right: 10px;"></i>Cite</a>
+							<a href="https://github.com/FPSG-UIUC/GoFetch" target="_blank" class="btn btn-primary mr-2"
+								style="margin-right: 10px;"><i class="fa fa-github"
+									style="padding-right: 10px;"></i>Tools</a>
+						</div>
+					</div>
+
+					<div class="modal fade" id="cite-gofetch" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Cite GoFetch</h5>
+								</div>
+
+								<div class="modal-body">
+									<textarea class="form-control rounded-0" id="citeTextarea" rows="8" readonly>
+
+@inproceedings{gofetch,
+	title = {GoFetch: Breaking Constant-Time Cryptographic Implementations Using Data Memory-Dependent Prefetchers},
+	author = {Boru Chen and Yingchen Wang and Pradyumna Shome and Christopher W. Fletcher and David Kohlbrenner and Riccardo Paccagnella and Daniel Genkin},
+	booktitle = {USENIX Security},
+	year = {2024},
+}
+		
+										</textarea>
+								</div>
+
+								<div class="modal-footer">
+									<a href="javascript:copy_to_clipboard()" class="btn btn-primary mr-auto"><i
+											class="fa fa-clipboard" style="margin-right: 10px;" aria-hidden="true"></i>
+										Copy to Clipboard</a>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="demos">
+				<h4><i class="fa fa-play-circle-o" style="padding-right: 10px;"></i>Demo <span
+						style="color: #000080;">Videos.</span></h4>
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-2" style="margin-bottom: 20px;">
+						</div>
+						<div class="col-xl-8" style="margin-bottom: 20px;">
+							<h5 class="gray">Go's RSA-2048 Key Extraction on Apple m1</h5>
+							<div class="ratio ratio-16x9">
+								<video src="files/GoFetch-RSA-540p.mp4" controls muted></video>
+							</div>
+						</div>
+						<div class="col-xl-2" style="margin-bottom: 20px;">
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="people">
+				<h4 style="padding-top: 20px;"><i class="fa fa-user-plus" style="padding-right: 10px;"></i>People
+					<span style="color: #000080;">Behind GoFetch</span>
+				</h4>
+				<div class="container">
+					<div class="row">
+						<ul>
+							<li><a href="https://bluechen8.github.io/">Boru Chen </a><span class="badge badge-uiuc"><a
+										class="univ" href="https://illinois.edu">University of Illinois Urbana-Champaign</a></span></li>
+							<li><a href="https://www.cs.utexas.edu/~yingchen/">Yingchen Wang</a> <span class="badge badge-uta"><a
+										class="univ" href="https://www.utexas.edu">University of Texas at Austin</a></span></li>
+							<li><a href="https://pradyumnashome.com">Pradyumna Shome</a> <span class="badge badge-gatech"><a
+								class="univ" href="https://www.gatech.edu/">Georgia Institute of Technology</a></span></li>
+							<li><a href="https://cwfletcher.github.io">Christopher W. Fletcher</a> <span class="badge badge-ucb"><a
+								class="univ" href="https://www.berkeley.edu">University of California, Berkeley</a></span></li>
+							<li><a href="https://homes.cs.washington.edu/~dkohlbre/">David Kohlbrenner</a> <span class="badge badge-uw"><a
+								class="univ" href="https://www.washington.edu">University of Washington</a></span></li>
+							<li><a href="https://www.cs.cmu.edu/~rpaccagn/">Riccardo Paccagnella</a> <span class="badge badge-cmu"><a
+								class="univ" href="https://www.cmu.edu">Carnegie Mellon University</a></span></li>
+							<li><a href="https://faculty.cc.gatech.edu/~genkin/">Daniel Genkin</a> <span class="badge badge-gatech"><a
+								class="univ" href="https://www.gatech.edu/">Georgia Institute of Technology</a></span></li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p style="text-align: center;"><b>Contact us at <a
+										href="mailto:info@gofetch.fail">info@gofetch.fail</a></b></p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="qa">
+				<h4 style="padding-top: 20px;"><i class="fa fa-hand-paper-o"
+						style="padding-right: 10px;"></i>Frequently Asked <span
+						style="color: #000080;">Questions</span></h4>
+
+				<div class="accordion accordion-flush" id="all-question-answer">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingAffected">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseAffected" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseAffected">
+								What is the mechanism behind GoFetch?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseAffected" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingAffected">
+							<div class="accordion-body">
+								<p>
+									The GoFetch attack is based on a CPU feature 
+									called data memory-dependent prefetcher (DMP), 
+									which is present in the latest Apple processors. 
+									We reverse-engineered DMPs on Apple m-series CPUs 
+									and found that the DMP activates (and attempts to dereference) 
+									data loaded from memory that "looks like" a pointer. 
+									This explicitly violates a requirement 
+									of the constant-time programming paradigm, 
+									which forbids mixing data and memory access patterns. 
+								</p>
+								<p>
+									To exploit the DMP, we craft chosen inputs to cryptographic operations, 
+									in a way where pointer-like values only appear 
+									if we have correctly guessed some bits of the secret key. 
+									We verify these guesses by monitoring whether the DMP performs 
+									a dereference through cache-timing analysis. 
+									Once we make a correct guess, we proceed to guess the next batch of key bits. 
+									Using this approach, we show end-to-end key extraction attacks on popular 
+									constant-time implementations of classical 
+									(OpenSSL Diffie-Hellman Key Exchange, Go RSA decryption) 
+									and post-quantum cryptography (CRYSTALS-Kyber and CRYSTALS-Dilithium).
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingDifference">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseDifference" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseDifference">
+								What processors have DMPs and are affected by GoFetch?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseDifference" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingDifference">
+							<div class="accordion-body">
+								We have mounted end-to-end GoFetch attacks on Apple hardware equipped with m1 processors. 
+								We also tested DMP activation patterns on other Apple processors 
+								and found that m2 and m3 CPUs also exhibit similar exploitable DMP behavior. 
+								While we have not tested other m-series variants (e.g., m2 Pro, etc), 
+								we hypothesize that since these parts have the same microarchitecture as their simpler counterparts, 
+								they are likewise equipped with exploitable DMPs. 
+								Finally, we found that Intel's 13th Gen Raptor Lake microarchitecture also features a DMP. 
+								However, its activation criteria are more restrictive, making it robust to our attacks.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingCacheAttack">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseCacheAttack" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseCacheAttack">
+								What is the difference between GoFetch and Augury?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseCacheAttack" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingCacheAttack">
+							<div class="accordion-body">
+								<p>
+									The Apple m-series DMP was first discovered by <a href="https://www.prefetchers.info/">Augury</a>, 
+									which suggested that DMPs might mix data and addresses under some conditions. 
+									However, we found that the DMP activation criteria outlined by Augury are overly restrictive. 
+									This prevents Augury's findings from being sufficient to mount attacks on real-world constant-time cryptography. 
+								</p>
+								<p>
+									GoFetch shows that the DMP is significantly more aggressive than previously thought, 
+									and thus poses a much greater security risk. 
+									Specifically, we find that any value loaded from memory is a candidate for being dereferenced (literally!). 
+									This allows us to sidestep many of Augury's limitations and demonstrate end-to-end attacks on real constant-time code.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingConstantTime">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseConstantTime" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseConstantTime">
+								What is a Cache Side-Channel Attack?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseConstantTime" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingConstantTime">
+							<div class="accordion-body">
+								Modern processors use caches to reduce a program's memory access latency. 
+								If data has been accessed before, it gets cached, which makes subsequent accesses to it faster. 
+								Since the cache is shared by processes running on the same machine, 
+								attackers co-located to the same machine can monitor the cache's state to deduce a victim's access pattern.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingDMP">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseDMP" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseDMP">
+								What is constant-time programming?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseDMP" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingDMP">
+							<div class="accordion-body">
+								<p>
+									Constant-time programming is a paradigm that aims to harden code against side-channel attacks by ensuring that all operations take the same amount of time, regardless of their operands. In particular, constant-time code cannot contain secret-dependent branches, loops, or other control structures. Moreover, as the CPU caches different addresses with attacker-observable latency, constant-time code cannot mix data and addresses in any way and prohibits the use of secret-dependent memory accesses or array indices.
+								</p>
+								<p>
+									We show that even if a victim correctly separates data from addresses by following the constant-time paradigm, the DMP will generate secret-dependent memory access on the victim's behalf, resulting in variable-time code susceptible to our key-extraction attacks. 
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingOther">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseOther" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseOther">
+								What is a data memory-dependent prefetcher?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseOther" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingOther">
+							<div class="accordion-body">
+								Prefetchers are a hardware optimization that predicts memory addresses accessed in the near future and fetch the data into the cache accordingly from the main memory. To make a prediction, classical prefetchers use the address trace of previous demand accesses. This strategy performs poorly when it comes to irregular access patterns like linked-list traversals. Aiming to handle such irregular patterns, data memory-dependent prefetchers (DMPs) also consider the content of memory to determine what to fetch, which is capable of capturing those indirect access patterns. Unfortunately, this behavior inherently mixes data and memory addresses at the hardware level, making the entire compute stack non-constant-time, enabling our attack.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingOthers">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseOthers" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseOthers">
+								Are there other DMP-vulnerable cryptographic implementations?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseOthers" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingOthers">
+							<div class="accordion-body">
+								We don't know. Our attack relies on the fact that it is possible to craft inputs to control specific intermediate states, making them contain memory addresses in a key-dependent way. The DMP then serves as an oracle, allowing us to learn if the intermediate state indeed looks like a pointer and thus leaks secret key bits. Unfortunately, to assess if an implementation is vulnerable, cryptanalysis and code inspection are required to understand when and how intermediate values can be made to look like pointers in a way that leaks secrets. This process is manual and slow and does not rule out other attack approaches. 
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingDisable">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseDisable" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseDisable">
+								Can the DMP be disabled?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseDisable" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingDisable">
+							<div class="accordion-body">
+								Yes, but only on some processors.
+								We observe that the <a href="https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/DIT--Data-Independent-Timing">DIT bit</a>
+								set on m3 CPUs effectively disables the DMP.
+								This is not the case for the m1 and m2.
+								Also, Intel's counterpart, <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html">DOIT bit</a>, 
+								can be used to disable DMP on the Raptor Lake processors.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingCountermeasure">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseCountermeasure" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseCountermeasure">
+								What can I do to protect myself against this attack?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseCountermeasure" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingCountermeasure">
+							<div class="accordion-body">
+								For users, we recommend using the latest versions of software, as well as performing updates regularly. Developers of cryptographic libraries can either set the DOIT and DIT bits, which disable the DMP on some CPUs. Additionally, input blinding can help some cryptographic schemes avoid having attacker-controlled intermediate values, avoiding key-dependent DMP activation. Finally, preventing attackers from measuring DMP activation in the first place, for example by avoiding hardware sharing, can further enhance the security of cryptographic protocols.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingPoC">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapsePoC" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapsePoC">
+								Is there a proof-of-concept code?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapsePoC" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingPoC">
+							<div class="accordion-body">
+								Yes, we will release it soon.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingLogo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseLogo" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseLogo">
+								Can I use the logo?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseLogo" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingLogo">
+							<div class="accordion-body">
+								Yes, <a href="img/gofetch.svg">SVG</a> and <a href="img/gofetch.png">PNG</a> versions 
+								of GoFetch logo are free to use under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a> liscence.
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingNotify">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseNotify" aria-expanded="false"
+								aria-controls="panelsStayOpen-collapseNotify">
+								When did you notify Apple?
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseNotify" class="accordion-collapse collapse"
+							aria-labelledby="panelsStayOpen-headingNotify">
+							<div class="accordion-body">
+								We discloused our findings to Apple on December 5, 2023 (107 days before public release).
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="acknowledgments">
+				<h4><i class="fa fa-certificate" style="padding-right: 10px;"></i>Acknowledgments</h4>
+				<div class="block">
+					<p>
+						This work was partially supported by
+						the Air Force Office of Scientific Research (AFOSR) under award number FA9550-20-1-0425;
+						the Defense Advanced Research Projects Agency (DARPA) under contract
+						numbers W912CG-23-C-0022 and HR00112390029;
+						the National Science Foundation (NSF) under grant numbers 1954712, 1954521, 2154183, 2153388, and 1942888;
+						the Alfred P. Sloan Research Fellowship;
+						and gifts from Intel, Qualcomm,
+						and Cisco.
+					</p>
+				</div>
+			</section>
+		</div>
+
+		<footer>
+			<div class="text-center w-100">
+				<span>Copyright &copy; 2024 Georgia Institute of Technology. All rights reserved.</span>
+			</div>
+		</footer>
+
+		<!-- Cite breaks without older Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"></script>
+
 	</body>
 
 </html>
