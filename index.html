@@ -355,7 +355,7 @@
 							aria-labelledby="panelsStayOpen-headingDisable">
 							<div class="accordion-body">
 								Yes, but only on some processors.
-								We observe that the <a href="https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/DIT--Data-Independent-Timing">DIT bit</a>
+								We observe that the <a href="https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms#Enable-DIT-for-constant-time-cryptographic-operations">DIT bit</a>
 								set on m3 CPUs effectively disables the DMP.
 								This is not the case for the m1 and m2.
 								Also, Intel's counterpart, <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html">DOIT bit</a>, 
@@ -374,7 +374,17 @@
 						<div id="panelsStayOpen-collapseCountermeasure" class="accordion-collapse collapse"
 							aria-labelledby="panelsStayOpen-headingCountermeasure">
 							<div class="accordion-body">
-								For users, we recommend using the latest versions of software, as well as performing updates regularly. Developers of cryptographic libraries can either set the DOIT and DIT bits, which disable the DMP on some CPUs. Additionally, input blinding can help some cryptographic schemes avoid having attacker-controlled intermediate values, avoiding key-dependent DMP activation. Finally, preventing attackers from measuring DMP activation in the first place, for example by avoiding hardware sharing, can further enhance the security of cryptographic protocols.
+								For users, we recommend using the latest versions of software, 
+								as well as performing updates regularly. 
+								Developers of cryptographic libraries can either set the 
+								<a href="https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html">DOIT bit</a>
+								and 
+								<a href="https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms#Enable-DIT-for-constant-time-cryptographic-operations">DIT bit</a> 
+								bits, which disable the DMP on some CPUs. 
+								Additionally, input blinding can help some cryptographic schemes avoid having attacker-controlled intermediate values, 
+								avoiding key-dependent DMP activation. 
+								Finally, preventing attackers from measuring DMP activation in the first place, 
+								for example by avoiding hardware sharing, can further enhance the security of cryptographic protocols.
 							</div>
 						</div>
 					</div>
