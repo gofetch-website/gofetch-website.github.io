@@ -94,6 +94,14 @@
 						Go RSA, as well as CRYSTALS Kyber and Dilithium.
 					</p>
 
+					<h5><i class="fa fa-bullhorn" style="padding-right: 10px;"></i>Update (April 2024)</span></h4>
+					<p>
+						A HID configuration bit (SYS_APL_HID11_EL1[30]) was found by Hector Martin (marcan) to disable DMPs on m1 and m2 CPUs. 
+						Setting this chicken bit requires kernel support that is not available in macOS at this time. 
+						See <a href="https://infosec.exchange/@marcan@treehouse.systems/112238390873024938">@marcan's post</a>
+						for further details (and thank you Hector!).
+					</p>
+
 					<div class="row" style="padding-top: 10px; text-align: center;">
 						<div class="col-xs-12 button-wrapper">
 							<a href="files/gofetch.pdf" target="_blank" class="btn btn-primary mr-2"
@@ -361,12 +369,20 @@
 						<div id="panelsStayOpen-collapseDisable" class="accordion-collapse collapse"
 							aria-labelledby="panelsStayOpen-headingDisable">
 							<div class="accordion-body">
-								Yes, but only on some processors.
-								We observe that the <a href="https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms#Enable-DIT-for-constant-time-cryptographic-operations">DIT bit</a>
-								set on m3 CPUs effectively disables the DMP.
-								This is not the case for the m1 and m2.
-								Also, Intel's counterpart, <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html">DOIT bit</a>, 
-								can be used to disable DMP on the Raptor Lake processors.
+								<p>
+									Yes, but only on some processors.
+									We observe that the <a href="https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms#Enable-DIT-for-constant-time-cryptographic-operations">DIT bit</a>
+									set on m3 CPUs effectively disables the DMP.
+									This is not the case for the m1 and m2.
+									Also, Intel's counterpart, <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html">DOIT bit</a>, 
+									can be used to disable DMP on the Raptor Lake processors.
+								</p>
+								<p>
+									<b>Update (April 2024):</b> A HID configuration bit (SYS_APL_HID11_EL1[30]) was found by Hector Martin (marcan) to disable DMPs on m1 and m2 CPUs. 
+									Setting this chicken bit requires kernel support that is not available in macOS at this time. 
+									See <a href="https://infosec.exchange/@marcan@treehouse.systems/112238390873024938">@marcan's post</a>
+									for further details (and thank you Hector!).
+								</p>
 							</div>
 						</div>
 					</div>
